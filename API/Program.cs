@@ -15,6 +15,8 @@ builder.Services.AddDbContext<StoreContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); //it registers GenericRepository as our service
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //look inside our current domain assembly and register the mapping profiles when the app starts up
 
 var app = builder.Build();
 
@@ -24,6 +26,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseStaticFiles();      //now API server knows it needs to serve static content not only HTTP requests 46
 
 app.UseAuthorization();
 
