@@ -1,4 +1,5 @@
 using API.Dtos;
+using API.Errors;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
@@ -9,9 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseApiController
     {
         // private readonly IProductRepository _repo;               implementing generic repo 34
 
@@ -57,6 +56,8 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]                     //creates swagger responses 55
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]   //creates swagger responses
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
@@ -64,6 +65,8 @@ namespace API.Controllers
             //        return await _productsRepo.GetEntityWithSpec(spec);           go to the products repo and get the entity with spec specification and we passing spec
             //                                                              along with expressions from ProductsWithTypesAndBrandsSpecification to our generic repository
             var product = await _productsRepo.GetEntityWithSpec(spec);
+
+            if (product == null) return NotFound(new ApiResponse(404));  //check if we get a product id that is null drop not found error
 
             return _mapper.Map<Product, ProductToReturnDto>(product);
 
