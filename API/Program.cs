@@ -22,6 +22,8 @@ app.UseSwaggerUI();
 
 app.UseStaticFiles();      //now API server knows it needs to serve static content not only HTTP requests 46
 
+app.UseCors("CorsPolicy");   //67
+
 app.UseAuthorization();
 
 app.MapControllers();

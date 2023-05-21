@@ -16,6 +16,21 @@ namespace Infrastructure.Data
                 query = query.Where(spec.Criteria); //where id = ProductId                 (((spec.Criteria is replaced like p => p.ProductTypeId == id)))
             }
 
+            if (spec.OrderBy != null)
+            {
+                query = query.OrderBy(spec.OrderBy);        //59
+            }
+
+            if (spec.OrderByDescending != null)
+            {
+                query = query.OrderByDescending(spec.OrderByDescending);        
+            }
+
+            if (spec.IsPagingEnabled)           //paging operator needs to come after any filterig or sorting operators
+            {
+                query = query.Skip(spec.Skip).Take(spec.Take);
+            }
+
             query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
             
             /* This takes the 2 include statements for product repository and aggregate them and pass it to query which is and IQueryable 
