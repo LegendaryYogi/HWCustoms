@@ -9,3 +9,16 @@
     top: -12px;
     right: 32px;
 }
+
+a {
+    text-decoration: none;
+    color: #343a40;
+
+    &.active {                              //apply this style to anything that's active or has the active class Inside an A tank.    110
+        color: orange;
+    }
+}
+
+.logo {
+    cursor: pointer;
+}
