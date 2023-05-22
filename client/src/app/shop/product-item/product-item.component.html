@@ -3,7 +3,7 @@
     <div class="image position-relative" style="cursor: pointer">
       <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img-fluid bg-info">  <!--ADDING BACKGROUND FOR PRODUCT CARDS BLUE class img fluid bginfo and adding images  92 4p-->
       <div class="d-flex align-items-center justify-content-center hover-overlay">
-        <button class="btn btn-primary fa fa-shopping-cart me-2"></button>   <!-- fa = font awesome styling?-->
+        <button (click)="addItemToBasket()" class="btn btn-primary fa fa-shopping-cart me-2"></button>   <!-- fa = font awesome styling?  | adding click event 150-->
         <button routerLink="/shop/{{product.id}}" class="btn btn-primary">View</button>
       </div>
     </div>

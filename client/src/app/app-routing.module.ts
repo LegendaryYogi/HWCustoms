@@ -11,6 +11,8 @@ const routes: Routes = [
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
   {path: 'shop', loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule)},         //113 lazy loading when click on shop path
+  {path: 'basket', loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule)},         //routes for basket 146
+  {path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule)},
   {path: '**', redirectTo: '', pathMatch: 'full'},       //doesn't exist     108
 ];
 
