@@ -1,6 +1,9 @@
 using API.Extensions;
 using API.Middleware;
+using Core.Entities.Identity;
 using Infrastructure.Data;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);  //services added to ApplicationServicesExtensions.cs to mage this class cleaner
+builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -24,6 +28,7 @@ app.UseStaticFiles();      //now API server knows it needs to serve static conte
 
 app.UseCors("CorsPolicy");   //67
 
+app.UseAuthentication();        //168
 app.UseAuthorization();
 
 app.MapControllers();
@@ -31,11 +36,15 @@ app.MapControllers();
 using var scope = app.Services.CreateScope();       //using => disposed method is going to be called after finished
 var servicces = scope.ServiceProvider;
 var context =servicces.GetRequiredService<StoreContext>();
+var identityContext =servicces.GetRequiredService<AppIdentityDbContext>();
+var userManager =servicces.GetRequiredService<UserManager<AppUser>>();      //168
 var logger = servicces.GetRequiredService<ILogger<Program>>();
 try
 {
     await context.Database.MigrateAsync();
+    await identityContext.Database.MigrateAsync();
     await StoreContextSeed.SeedAsync(context);
+    await AppIdentityDbContextSeed.SeedUserAsync(userManager);
 }
 catch (Exception ex)
 {

@@ -1,6 +1,7 @@
 using API.Errors;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -25,6 +26,7 @@ namespace API.Extensions
             });
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ITokenService, TokenService>();      //173
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); //it registers GenericRepository as our service
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //look inside our current domain assembly and register the mapping profiles when the app starts up
             services.Configure<ApiBehaviorOptions>(options =>
