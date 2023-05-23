@@ -14,9 +14,11 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor(private busyService: BusyService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.busyService.busy();
+    if (!request.url.includes('emailExists')){    //check what the url is before engage busyService 203
+      this.busyService.busy();    
+    }
     return next.handle(request).pipe(
-      delay(1000),
+      delay(1000),                                           //loading delay time sec
       finalize(() => this.busyService.idle())      
     );
   }
