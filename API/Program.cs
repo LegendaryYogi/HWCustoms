@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);  //services added to ApplicationServicesExtensions.cs to mage this class cleaner
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddSwaggerDocumentation();     //184
 
 var app = builder.Build();
 
@@ -21,8 +22,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseStatusCodePagesWithReExecute("/errors/{0}");  //middleware 51  not found endpoint now gives api response and not just an empty 404 not found
 
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerDocumentation();                  //184
 
 app.UseStaticFiles();      //now API server knows it needs to serve static content not only HTTP requests 46
 
