@@ -99,7 +99,7 @@ namespace API.Controllers
                 return new BadRequestObjectResult(new ApiValidationErrorResponse{Errors = new []{"Email address is in use"}});  //182 validation
             }
 
-            var user = new AppUser
+            var user = new AppUser                                      //170
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,

@@ -1,4 +1,5 @@
 using API.Errors;
+using Core.Entities.OrderAggregate.Interfaces;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Services;
@@ -23,6 +24,8 @@ namespace API.Extensions
                 return ConnectionMultiplexer.Connect(options);
             });
             services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<IOrderService, OrderService>();          //213
+            services.AddScoped<IUnitOfWork, UnitOfWork>();          //218
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ITokenService, TokenService>();      //173
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); //it registers GenericRepository as our service

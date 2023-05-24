@@ -1,0 +1,34 @@
+[
+  {
+    "Id": 1,
+    "Name": "ASUS"
+  },
+  {
+    "Id": 2,
+    "Name": "MSI"
+  },
+  {
+    "Id": 3,
+    "Name": "Corsair"
+  },
+  {
+    "Id": 4,
+    "Name": "HyperX"
+  },
+  {
+    "Id": 5,
+    "Name": "Artic cooling"
+  },
+  {
+    "Id": 6,
+    "Name": "Cooler Master"
+  },
+  {
+    "Id": 7,
+    "Name": "AMD"
+  },
+  {
+    "Id": 8,
+    "Name": "NVIDIA"
+  }
+]
