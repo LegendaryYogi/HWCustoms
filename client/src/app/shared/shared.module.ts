@@ -5,7 +5,7 @@ import { PagingHeaderComponent } from './paging-header/paging-header.component';
 import { PagerComponent } from './pager/pager.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { OrderTotalsComponent } from './order-totals/order-totals.component';   //adding home page bootstrap
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { StepperComponent } from './components/stepper/stepper.component';
@@ -29,6 +29,7 @@ import { RouterLink, RouterModule } from '@angular/router';
     PaginationModule.forRoot(),      //adding forroot - pagination module is loaded as a singleton we want it to be single instance shared by any components that make use of it. 97
     CarouselModule.forRoot(),
     ReactiveFormsModule,
+    FormsModule,
     BsDropdownModule.forRoot(),
     CdkStepperModule,    //231
     RouterModule

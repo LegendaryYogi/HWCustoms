@@ -35,6 +35,7 @@ namespace API.Controllers
 
         }
 
+        [Cached(600)]       //data cached for x seconds  279
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
             [FromQuery]ProductSpecParams productParams)   //adding specparams class 64       controller not able to bind productParams to our HttpGet method so we tell to look for these properties in Query string
@@ -62,6 +63,7 @@ namespace API.Controllers
             }).ToList();        //products are in memory so we select them in memory and turning them into a list.  42 */
         }
 
+        [Cached(600)]
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]                     //creates swagger responses 55
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]   //creates swagger responses
@@ -89,12 +91,14 @@ namespace API.Controllers
 
         }
 
+        [Cached(600)]
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()             //29  34
         {
             return Ok(await _productBrandRepo.ListAllAsync());
         }
 
+        [Cached(600)]
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
