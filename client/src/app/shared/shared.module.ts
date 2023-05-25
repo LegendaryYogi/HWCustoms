@@ -8,6 +8,10 @@ import { OrderTotalsComponent } from './order-totals/order-totals.component';   
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TextInputComponent } from './components/text-input/text-input.component';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { BasketSummaryComponent } from './basket-summary/basket-summary.component';
+import { RouterLink, RouterModule } from '@angular/router';
 
 
 
@@ -16,14 +20,19 @@ import { TextInputComponent } from './components/text-input/text-input.component
     PagingHeaderComponent,
     PagerComponent,
     OrderTotalsComponent,
-    TextInputComponent
+    TextInputComponent,
+    StepperComponent,
+    BasketSummaryComponent    //231
   ],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),      //adding forroot - pagination module is loaded as a singleton we want it to be single instance shared by any components that make use of it. 97
     CarouselModule.forRoot(),
     ReactiveFormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    CdkStepperModule,    //231
+    RouterModule
+    
   ],
   exports: [
     PaginationModule,
@@ -33,7 +42,10 @@ import { TextInputComponent } from './components/text-input/text-input.component
     OrderTotalsComponent,
     ReactiveFormsModule,
     BsDropdownModule,
-    TextInputComponent
+    TextInputComponent,
+    StepperComponent,
+    CdkStepperModule,
+    BasketSummaryComponent
   ]
 })
 export class SharedModule { }
